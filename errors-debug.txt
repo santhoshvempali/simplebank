@@ -1,0 +1,1 @@
+https://github.com/golang/mock/issues/494 # for mockgen isue

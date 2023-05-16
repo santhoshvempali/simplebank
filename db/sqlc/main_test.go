@@ -6,6 +6,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/santhoshvempali/simplebank/util"
+
 	_ "github.com/lib/pq"
 )
 
@@ -19,7 +21,13 @@ var TestDb *sql.DB
 var err error
 
 func TestMain(m *testing.M) {
-	TestDb, err = sql.Open(dbDriver, dbSource)
+	config, err := util.LoadConfig("../..")
+	if err != nil {
+		log.Fatal("error loading env", err)
+
+	}
+
+	TestDb, err = sql.Open(config.DB_DRIVER, config.DB_SERVICE)
 	if err != nil {
 		log.Fatal("error occured whicle connecting to db", err)
 	}
