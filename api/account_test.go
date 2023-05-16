@@ -24,7 +24,7 @@ func TestGetAccount(t *testing.T) {
 	defer ctrl.Finish()
 	store := mockdb.NewMockStore(ctrl)
 	store.EXPECT().GetAccount(gomock.Any(), gomock.Eq(account.ID)).Times(1).Return(account, nil)
-	server := newTestServer(t, store)
+	server := NewServer(store)
 	recorder := httptest.NewRecorder()
 	url := fmt.Sprintf("/account/%d", account.ID)
 	request, err := http.NewRequest(http.MethodGet, url, nil)
